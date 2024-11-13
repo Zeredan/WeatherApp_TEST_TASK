@@ -13,21 +13,27 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.example.core.PresenterLayer.gradiental
+import com.example.optionsfeature.R
 import com.example.optionsfeature.ViewModels.OptionsViewModel
 
 @Composable
@@ -47,35 +53,43 @@ fun OptionsRoot() {
     val fm = LocalFocusManager.current
     Column(
         modifier = Modifier
-            .pointerInput(1){
+            .pointerInput(1) {
                 detectTapGestures {
                     fm.clearFocus(true)
                 }
             }
+            .gradiental(
+                listOf(
+                    colorResource(id = R.color.blue1),
+                    colorResource(id = R.color.green1),
+                )
+            )
             .fillMaxSize()
             .padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(30.dp),
         horizontalAlignment = Alignment.End
     )
     {
+        Text(modifier = Modifier.align(Alignment.CenterHorizontally), text = "Настройки", fontSize = 26.sp, color = colorResource(id = R.color.yellow2))
+        Divider(thickness = 2.dp)
         Row(
             verticalAlignment = Alignment.CenterVertically
         )
         {
-            Text("Показывать доп. информацию")
+            Text("Показывать доп. информацию", color = colorResource(id = R.color.yellow1))
             Spacer(Modifier.width(10.dp))
             Switch(
                 checked = vm.savedOptions.showAdditionalInfo,
                 onCheckedChange = {
                     vm.updateShowAdditionalInfo(it)
-                }
+                },
             )
         }
         Row(
             verticalAlignment = Alignment.CenterVertically
         )
         {
-            Text("Использовать текущее местоположение")
+            Text("Использовать текущее местоположение", color = colorResource(id = R.color.yellow1))
             Spacer(Modifier.width(10.dp))
             Switch(
                 checked = vm.savedOptions.useCurrentLocation,
@@ -87,17 +101,17 @@ fun OptionsRoot() {
         TextField(
             value = vm.savedOptions.selectedCity,
             label = {
-                Text("Выбранный город")
+                Text("Выбранный город", color = colorResource(id = R.color.cyan2))
             },
             onValueChange = {
                 vm.updateSelectedCity(it)
             },
-            enabled = !vm.savedOptions.useCurrentLocation
+            enabled = !vm.savedOptions.useCurrentLocation,
         )
         TextField(
             value = vm.savedOptions.apiKey,
             label = {
-                Text("OpenWeatherMap api key")
+                Text("OpenWeatherMap api key", color = colorResource(id = R.color.cyan2))
             },
             onValueChange = {
                 vm.updateApiKey(it)
@@ -114,7 +128,7 @@ fun OptionsRoot() {
             enabled = vm.isSomethingChanged
         )
         {
-            Text(text = "Сохранить настройки", fontSize = 26.sp)
+            Text(text = "Сохранить настройки", fontSize = 26.sp, color = colorResource(id = R.color.yellow1))
         }
         Spacer(modifier = Modifier.height(20.dp))
     }

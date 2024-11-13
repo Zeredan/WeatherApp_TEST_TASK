@@ -1,6 +1,8 @@
 package com.example.todayforecastfeature.Views
 
+import android.os.Build
 import androidx.activity.ComponentActivity
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -30,11 +32,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.core.PresenterLayer.gradiental
+import com.example.todayforecastfeature.R
 import com.example.todayforecastfeature.ViewModels.TodayForecastViewModel
 
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 internal fun HourShowcase(vm: TodayForecastViewModel, hourInd: Int, onNearHourClicked: (Int) -> Unit) {
     val context = (LocalContext.current as ComponentActivity)
@@ -50,25 +56,34 @@ internal fun HourShowcase(vm: TodayForecastViewModel, hourInd: Int, onNearHourCl
             hourWeatherList?.get(hourInd)
         }
         Spacer(modifier = Modifier.height(0.dp))
-        Text("Сегодня|${selectedHour?.time}", fontSize = 26.sp)
+        Text("Сегодня|${selectedHour?.time}", fontSize = 26.sp, color = colorResource(id = R.color.yellow2))
         Divider(thickness = 2.dp)
         LazyColumn(
             contentPadding = PaddingValues(10.dp),
             modifier = Modifier
-                .border(width = 2.dp, color = Color.Black, shape = RoundedCornerShape(10.dp))
+                .border(
+                    width = 2.dp,
+                    color = colorResource(id = R.color.gray2),
+                    shape = RoundedCornerShape(10.dp)
+                )
                 .clip(RoundedCornerShape(10.dp))
-                .background(Color.DarkGray)
+                .gradiental(
+                    listOf(
+                        colorResource(id = R.color.darkblue1),
+                        colorResource(id = R.color.blue1)
+                    )
+                )
                 .fillMaxWidth(0.8f)
                 .weight(1f)
         )
         {
             item{
-                Text("Температура: ${selectedHour?.temperature}")
-                Text("Ощущается: ${selectedHour?.feelsLike}")
-                Text("Влажность: ${selectedHour?.humidity}")
-                Text("Скорость ветра: ${selectedHour?.windSpeed}")
-                Text("Порывы ветра: ${selectedHour?.windGust}")
-                Text("угол ветра: ${selectedHour?.windDeg}")
+                Text("Температура: ${selectedHour?.temperature}", color = colorResource(id = R.color.yellow1))
+                Text("Ощущается: ${selectedHour?.feelsLike}", color = colorResource(id = R.color.yellow1))
+                Text("Влажность: ${selectedHour?.humidity}", color = colorResource(id = R.color.yellow1))
+                Text("Скорость ветра: ${selectedHour?.windSpeed}", color = colorResource(id = R.color.yellow1))
+                Text("Порывы ветра: ${selectedHour?.windGust}", color = colorResource(id = R.color.yellow1))
+                Text("угол ветра: ${selectedHour?.windDeg}", color = colorResource(id = R.color.yellow1))
             }
         }
         Row(
@@ -81,7 +96,9 @@ internal fun HourShowcase(vm: TodayForecastViewModel, hourInd: Int, onNearHourCl
         )
         {
             Button(
-                modifier = Modifier.weight(2f).fillMaxHeight(),
+                modifier = Modifier
+                    .weight(2f)
+                    .fillMaxHeight(),
                 onClick = {
                     onNearHourClicked(hourInd - 1)
                 },
@@ -89,20 +106,24 @@ internal fun HourShowcase(vm: TodayForecastViewModel, hourInd: Int, onNearHourCl
                 shape = RoundedCornerShape(10.dp)
             )
             {
-                Text("Предыдущий час")
+                Text("Предыдущий час", color = colorResource(id = R.color.yellow2))
             }
             Button(
-                modifier = Modifier.weight(3f).fillMaxHeight(),
+                modifier = Modifier
+                    .weight(3f)
+                    .fillMaxHeight(),
                 onClick = {
                     context.onBackPressedDispatcher.onBackPressed()
                 },
                 shape = RoundedCornerShape(10.dp)
             )
             {
-                Text("Назад")
+                Text("Назад", color = colorResource(id = R.color.yellow2))
             }
             Button(
-                modifier = Modifier.weight(2f).fillMaxHeight(),
+                modifier = Modifier
+                    .weight(2f)
+                    .fillMaxHeight(),
                 onClick = {
                     onNearHourClicked(hourInd + 1)
                 },
@@ -110,7 +131,7 @@ internal fun HourShowcase(vm: TodayForecastViewModel, hourInd: Int, onNearHourCl
                 shape = RoundedCornerShape(10.dp)
             )
             {
-                Text("Следующий час")
+                Text("Следующий час", color = colorResource(id = R.color.yellow2))
             }
         }
         Spacer(modifier = Modifier.height(0.dp))

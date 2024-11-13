@@ -59,6 +59,7 @@ class WeekForecastViewModel(var context: Context) : ViewModel() {
             context
         )
         viewModelScope.launch {
+            loadingResult = null
             println("preparing...")
 
             val result = getDailyWeatherUseCase.getData()

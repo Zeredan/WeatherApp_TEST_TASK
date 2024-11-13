@@ -1,8 +1,10 @@
 package com.example.weatherapp_testtask
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.EaseInCirc
 import androidx.compose.animation.core.EaseInOutCirc
@@ -61,6 +63,7 @@ import com.example.weekforecastfeature.Views.WeekForecastRoot
 
 class MainActivity : ComponentActivity() {
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @Composable
     fun AppRoot() {
         val snackbarHostState = remember{ SnackbarHostState() }
@@ -89,15 +92,6 @@ class MainActivity : ComponentActivity() {
             {
                 NavHost(
                     modifier = Modifier
-                        .background(object : ShaderBrush() {
-                            override fun createShader(size: Size): Shader {
-                                return LinearGradientShader(
-                                    Offset.Zero,
-                                    size.center * 2f,
-                                    listOf(Color.LightGray, Color.DarkGray)
-                                )
-                            }
-                        })
                         .weight(1f)
                         .fillMaxWidth(),
                     navController = navController,
@@ -153,7 +147,7 @@ class MainActivity : ComponentActivity() {
                                 blue = 1f - animatedColor.red
                             )
                         ),
-                        img = R.drawable.ic_launcher_background
+                        img = R.drawable.feat_1_icon
                     )
                     NavigationButton(
                         onClick = {
@@ -170,7 +164,7 @@ class MainActivity : ComponentActivity() {
                                 blue = 1f - animatedColor.red
                             )
                         ),
-                        img = R.drawable.ic_launcher_background
+                        img = R.drawable.feat_2_icon
                     )
                     NavigationButton(
                         onClick = {
@@ -187,7 +181,7 @@ class MainActivity : ComponentActivity() {
                                 blue = 1f - animatedColor.red
                             )
                         ),
-                        img = R.drawable.ic_launcher_background
+                        img = R.drawable.feat_3_icon
                     )
                 }
             }

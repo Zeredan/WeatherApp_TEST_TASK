@@ -1,6 +1,8 @@
 package com.example.weekforecastfeature.Views
 
+import android.os.Build
 import androidx.activity.ComponentActivity
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -30,11 +32,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.core.PresenterLayer.gradiental
+import com.example.weekforecastfeature.R
 import com.example.weekforecastfeature.ViewModels.WeekForecastViewModel
 
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 internal fun DayShowcase(vm: WeekForecastViewModel, dayInd: Int, onNearDayClicked: (Int) -> Unit) {
     val context = (LocalContext.current as ComponentActivity)
@@ -50,28 +56,37 @@ internal fun DayShowcase(vm: WeekForecastViewModel, dayInd: Int, onNearDayClicke
             dayWeatherList?.get(dayInd)
         }
         Spacer(modifier = Modifier.height(0.dp))
-        Text("${selectedDay?.time}", fontSize = 26.sp)
+        Text("На Неделю|${selectedDay?.time}", fontSize = 26.sp, color = colorResource(id = R.color.yellow2))
         Divider(thickness = 2.dp)
         LazyColumn(
             contentPadding = PaddingValues(10.dp),
             modifier = Modifier
-                .border(width = 2.dp, color = Color.Black, shape = RoundedCornerShape(10.dp))
+                .border(
+                    width = 2.dp,
+                    color = colorResource(id = R.color.gray2),
+                    shape = RoundedCornerShape(10.dp)
+                )
                 .clip(RoundedCornerShape(10.dp))
-                .background(Color.DarkGray)
+                .gradiental(
+                    listOf(
+                        colorResource(id = R.color.darkblue1),
+                        colorResource(id = R.color.purple1)
+                    )
+                )
                 .fillMaxWidth(0.8f)
                 .weight(1f)
         )
         {
             item{
-                Text("Минимальная температура: ${selectedDay?.temperature?.min}")
-                Text("Максимальная температура: ${selectedDay?.temperature?.max}")
-                Text("Температура утром: ${selectedDay?.temperature?.morning}")
-                Text("Температура днем: ${selectedDay?.temperature?.day}")
-                Text("Температура вечером: ${selectedDay?.temperature?.evening}")
-                Text("Температура ночью: ${selectedDay?.temperature?.night}")
-                Text("Скорость ветра: ${selectedDay?.windSpeed}")
-                Text("Порывы ветра: ${selectedDay?.windGust}")
-                Text("угол ветра: ${selectedDay?.windDeg}")
+                Text("Минимальная температура: ${selectedDay?.temperature?.min}", color = colorResource(id = R.color.yellow1))
+                Text("Максимальная температура: ${selectedDay?.temperature?.max}", color = colorResource(id = R.color.yellow1))
+                Text("Температура утром: ${selectedDay?.temperature?.morning}", color = colorResource(id = R.color.yellow1))
+                Text("Температура днем: ${selectedDay?.temperature?.day}", color = colorResource(id = R.color.yellow1))
+                Text("Температура вечером: ${selectedDay?.temperature?.evening}", color = colorResource(id = R.color.yellow1))
+                Text("Температура ночью: ${selectedDay?.temperature?.night}", color = colorResource(id = R.color.yellow1))
+                Text("Скорость ветра: ${selectedDay?.windSpeed}", color = colorResource(id = R.color.yellow1))
+                Text("Порывы ветра: ${selectedDay?.windGust}", color = colorResource(id = R.color.yellow1))
+                Text("угол ветра: ${selectedDay?.windDeg}", color = colorResource(id = R.color.yellow1))
             }
         }
         Row(
@@ -94,7 +109,7 @@ internal fun DayShowcase(vm: WeekForecastViewModel, dayInd: Int, onNearDayClicke
                 shape = RoundedCornerShape(10.dp)
             )
             {
-                Text("Предыдущий день")
+                Text("Предыдущий день", color = colorResource(id = R.color.yellow2))
             }
             Button(
                 modifier = Modifier
@@ -106,7 +121,7 @@ internal fun DayShowcase(vm: WeekForecastViewModel, dayInd: Int, onNearDayClicke
                 shape = RoundedCornerShape(10.dp)
             )
             {
-                Text("Назад")
+                Text("Назад", color = colorResource(id = R.color.yellow2))
             }
             Button(
                 modifier = Modifier
@@ -119,7 +134,7 @@ internal fun DayShowcase(vm: WeekForecastViewModel, dayInd: Int, onNearDayClicke
                 shape = RoundedCornerShape(10.dp)
             )
             {
-                Text("Следующий день")
+                Text("Следующий день", color = colorResource(id = R.color.yellow2))
             }
         }
         Spacer(modifier = Modifier.height(0.dp))

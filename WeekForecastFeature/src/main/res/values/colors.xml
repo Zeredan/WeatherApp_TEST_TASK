@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <color name="yellow1">#FFffd900</color>
+    <color name="yellow2">#FFfdff00</color>
+    <color name="gray1">#FF8fa9a8</color>
+    <color name="cyan1">#FFbafffd</color>
+    <color name="purple1">#FF343280</color>
+    <color name="gray2">#FF494b5f</color>
+    <color name="cyan2">#FF8eb1bc</color>
+    <color name="cyan3">#FF1fc6ee</color>
+    <color name="gray3">#FFb3b3b3</color>
+    <color name="darkblue1">#FF1b4957</color>
+    <color name="bisqui">#FFe9eaa8</color>
+    <color name="blue1">#FF235aad</color>
+    <color name="red1">#FFad2351</color>
+</resources>
