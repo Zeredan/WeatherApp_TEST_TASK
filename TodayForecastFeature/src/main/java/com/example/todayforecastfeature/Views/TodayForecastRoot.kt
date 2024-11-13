@@ -1,7 +1,10 @@
 package com.example.todayforecastfeature.Views
 
+import android.os.Build
 import androidx.activity.ComponentActivity
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -45,6 +48,7 @@ fun TodayForecastRoot() {
     val vm by (context as ComponentActivity).viewModels<TodayForecastViewModel>(
         factoryProducer = {
             object : ViewModelProvider.Factory{
+                @RequiresApi(Build.VERSION_CODES.TIRAMISU)
                 override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
                     return TodayForecastViewModel(context) as T
                 }

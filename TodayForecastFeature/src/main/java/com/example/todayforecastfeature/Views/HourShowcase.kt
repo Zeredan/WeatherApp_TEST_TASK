@@ -74,10 +74,10 @@ internal fun HourShowcase(vm: TodayForecastViewModel, hourInd: Int, onNearHourCl
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(120.dp)
+                .height(90.dp)
                 .padding(10.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.spacedBy(5.dp)
         )
         {
             Button(

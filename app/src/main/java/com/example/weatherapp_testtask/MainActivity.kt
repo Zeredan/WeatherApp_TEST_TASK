@@ -53,9 +53,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.optionsfeature.Views.OptionsRoot
 import com.example.todayforecastfeature.Views.TodayForecastRoot
 import com.example.weatherapp_testtask.Composables.NavigationButton
 import com.example.weatherapp_testtask.ui.theme.WeatherApp_TestTaskTheme
+import com.example.weekforecastfeature.Views.WeekForecastRoot
 
 class MainActivity : ComponentActivity() {
 
@@ -106,10 +108,10 @@ class MainActivity : ComponentActivity() {
                         TodayForecastRoot()
                     }
                     composable("WeekForecast") {
-                        Text("2")
+                        WeekForecastRoot()
                     }
                     composable("Options") {
-                        Text("3")
+                        OptionsRoot()
                     }
                 }
                 Divider(thickness = 2.dp)
